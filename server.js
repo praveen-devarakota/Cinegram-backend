@@ -2,7 +2,9 @@ import express from 'express';
 import dotenv from "dotenv";
 import cors from 'cors';
 import {connectDB} from './config/db.js'; // Adjust the path as necessary
-
+import locationRoutes from "./routes/location.routes.js";
+import movieRoutes from "./routes/movie.routes.js";
+import theatreRoutes from "./routes/theatre.routes.js";
 
 dotenv.config();
 
@@ -13,9 +15,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Welcome to the backend server!');
-});
+
+app.use("/api/locations", locationRoutes);
+app.use("/api/movies", movieRoutes);
+app.use("/api/theatres", theatreRoutes);
+
+
 
 const startServer = async () => {
   try {
